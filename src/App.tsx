@@ -8,6 +8,7 @@ import { CartDrawer } from './components/cart/CartDrawer';
 
 // Home components
 import { HeroSection } from './components/home/HeroSection';
+import { SignaturePiecesSection } from './components/home/SignaturePiecesSection';
 import { TrustMarkers } from './components/home/TrustMarkers';
 import { CategoriesSection } from './components/home/CategoriesSection';
 import { CuratedSelection } from './components/home/CuratedSelection';
@@ -74,6 +75,7 @@ function AppContent() {
       return (
         <main id="main-content">
           <HeroSection navigate={navigate} />
+          <SignaturePiecesSection navigate={navigate} />
           <TrustMarkers />
           <CategoriesSection navigate={navigate} />
           <CuratedSelection navigate={navigate} />

@@ -35,10 +35,10 @@ export interface Product {
   id: string;
   sku: string;
   reference: string;
-  brand: 'Tissot' | 'Timex';
+  brand: 'Tissot' | 'Timex' | 'Maison Heritage' | string;
   name: string;
   slug: string;
-  category: 'montres' | 'parfums' | 'lunettes';
+  category: 'montres' | 'parfums' | 'lunettes' | string;
   priceXOF: number;
   stockStatus: StockStatus;
   stockCount: number;
@@ -118,6 +118,7 @@ export interface ContactRequest {
 export interface FilterState {
   search: string;
   brand: string[];
+  category: string[];
   movement: string[];
   diameter: string[];
   waterResistance: string[];
@@ -126,6 +127,7 @@ export interface FilterState {
   availability: string[];
   minPrice?: number;
   maxPrice?: number;
+  pricePreset?: string;
   sort: 'pertinence' | 'prix_croissant' | 'prix_decroissant' | 'nouveautes';
 }
 

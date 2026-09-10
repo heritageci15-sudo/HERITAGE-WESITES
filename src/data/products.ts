@@ -457,6 +457,144 @@ export const DRAFT_PRODUCTS: Partial<Product>[] = [
     category: 'montres'
   },
   {
+    id: 'prod-timex-marlin-auto',
+    sku: 'TW2V44500',
+    reference: 'TW2V44500',
+    brand: 'Timex',
+    name: 'Timex Marlin Automatique 40 mm',
+    slug: 'timex-marlin-automatique-40mm-tw2v44500',
+    category: 'montres',
+    priceXOF: 145000,
+    stockStatus: 'En stock',
+    stockCount: 4,
+    status: 'published',
+    primaryImage: '/assets/products/timex-marlin.jpg',
+    additionalImages: [
+      {
+        url: '/assets/products/timex-marlin.jpg',
+        alt: 'Timex Marlin Automatique 40 mm, cadran épuré et boîtier acier.',
+        isPrimary: true,
+        type: 'face'
+      }
+    ],
+    shortDescription: 'Mouvement automatique Miyota 21 rubis. Boîtier acier inoxydable 40 mm. Verre minéral bombé rétro.',
+    valueStoryTitle: 'L\'icône américaine des années 1960 revisitée en mécanique automatique.',
+    valueStoryText: 'La Timex Marlin incarne le charme intemporel de l\'horlogerie vintage avec un calibre mécanique automatique visible au dos. Parfaite pour un porté quotidien sobre et élégant à Abidjan.',
+    attributes: {
+      modele: 'Timex Marlin Automatique 40 mm',
+      reference: 'TW2V44500',
+      diametre: '40 mm',
+      boitier: 'Acier inoxydable 316L',
+      verre: 'Verre acrylique / minéral bombé',
+      mouvement: 'Automatique',
+      bracelet: 'Cuir véritable marron surpiqué',
+      etancheite: 'Jusqu\'à 5 bar (50 m)',
+      cadran: 'Argenté soleillé',
+      fabrication: 'États-Unis / International'
+    },
+    provenanceSummary: 'Garde-temps certifié Timex avec coffret officiel et papiers vérifiés par HERITAGE à Abidjan.',
+    warrantySummary: 'Garantie de 1 an assurée par HERITAGE Abidjan.',
+    deliverySummary: 'Livraison express à Abidjan en 24h ou retrait direct à Yopougon.',
+    faq: [
+      {
+        question: 'Le mouvement nécessite-t-il une pile ?',
+        answer: 'Non, c\'est un calibre automatique qui se remonte naturellement avec les mouvements de votre poignet.'
+      }
+    ]
+  },
+  {
+    id: 'prod-timex-navi-xl',
+    sku: 'TW2U90000',
+    reference: 'TW2U90000',
+    brand: 'Timex',
+    name: 'Timex Navi XL Diver 41 mm',
+    slug: 'timex-navi-xl-diver-41mm-tw2u90000',
+    category: 'montres',
+    priceXOF: 125000,
+    stockStatus: 'En stock',
+    stockCount: 5,
+    status: 'published',
+    primaryImage: '/assets/products/timex-diver.jpg',
+    additionalImages: [
+      {
+        url: '/assets/products/timex-diver.jpg',
+        alt: 'Timex Navi XL Diver 41 mm avec lunette tournante et boîtier acier.',
+        isPrimary: true,
+        type: 'face'
+      }
+    ],
+    shortDescription: 'Inspiration militaire et marine. Lunette rotative unidirectionnelle noire. Étanche 100 mètres.',
+    valueStoryTitle: 'Robuste, sportive et parée pour l\'aventure urbaine ou maritime.',
+    valueStoryText: 'Inspirée des montres de plongée traditionnelles, la Navi XL combine un boîtier acier brossé résistant, une lunette graduée noire et un cadran à haute lisibilité.',
+    attributes: {
+      modele: 'Timex Navi XL Diver 41 mm',
+      reference: 'TW2U90000',
+      diametre: '41 mm',
+      boitier: 'Acier inoxydable brossé',
+      verre: 'Verre minéral renforcé',
+      mouvement: 'Quartz',
+      bracelet: 'Acier inoxydable réglable',
+      etancheite: 'Jusqu\'à 10 bar (100 m)',
+      cadran: 'Noir mat avec index luminescents',
+      fabrication: 'États-Unis / International'
+    },
+    provenanceSummary: 'Garantie d\'authenticité Timex contrôlée par la Maison HERITAGE.',
+    warrantySummary: 'Garantie de 1 an avec assistance technique HERITAGE.',
+    deliverySummary: 'Livraison sécurisée partout à Abidjan.',
+    faq: [
+      {
+        question: 'Peut-on se baigner avec cette montre ?',
+        answer: 'Oui, elle possède une étanchéité de 100 mètres (10 bar), parfaitement adaptée à la baignade et aux sports nautiques.'
+      }
+    ]
+  },
+  {
+    id: 'prod-heritage-parfum-oud',
+    sku: 'HER-EXT-01',
+    reference: 'HER-EXT-01',
+    brand: 'Maison Heritage',
+    name: 'Extrait de Parfum N°1 — Oud & Ambre Impérial 100 ml',
+    slug: 'extrait-de-parfum-oud-ambre-imperial-100ml',
+    category: 'parfums',
+    priceXOF: 85000,
+    stockStatus: 'En stock',
+    stockCount: 8,
+    status: 'published',
+    primaryImage: '/assets/products/parfum-heritage.jpg',
+    additionalImages: [
+      {
+        url: '/assets/products/parfum-heritage.jpg',
+        alt: 'Flacon de prestige Extrait de Parfum N°1 Oud & Ambre Impérial Maison Heritage.',
+        isPrimary: true,
+        type: 'face'
+      }
+    ],
+    shortDescription: 'Haute parfumerie. Concentration extrait (30%). Notes d\'Oud précieux, ambre chaud, safran et vanille bourbon.',
+    valueStoryTitle: 'Une signature olfactive envoûtante pensée pour les climats tropicaux chauds.',
+    valueStoryText: 'Créé pour laisser un sillage mémorable, cet Extrait de Parfum allie la noblesse du bois de oud d\'Asie du Sud-Est à la rondeur d\'un ambre ambré profond et velouté. Tenue exceptionnelle de plus de 16 heures.',
+    attributes: {
+      modele: 'Extrait de Parfum N°1 100 ml',
+      reference: 'HER-EXT-01',
+      diametre: 'Flacon verre lourd 100 ml',
+      boitier: 'Bouchon magnétique doré gravé',
+      verre: 'Verre cristal dépoli',
+      mouvement: 'Automatique' as any,
+      bracelet: 'Vaporisateur haute diffusion',
+      etancheite: 'Concentration 30% Extrait de Parfum',
+      cadran: 'Sillage chaud boisé oriental ambré',
+      fabrication: 'Grasse, France & Abidjan'
+    },
+    provenanceSummary: 'Formulation exclusive Maison HERITAGE réalisée à Grasse en France et conditionnée sous scellé.',
+    warrantySummary: 'Garantie authenticité et conservation optimale en cave climatisée.',
+    deliverySummary: 'Livraison express offerte dans un écrin cadeau exclusif HERITAGE.',
+    faq: [
+      {
+        question: 'Quelle est la tenue de ce parfum ?',
+        answer: 'Grâce à sa concentration en extrait pur à 30%, le parfum tient plus de 16 heures sur la peau et plusieurs jours sur les textiles.'
+      }
+    ]
+  },
+  {
     id: 'draft-tissot-carson-noir',
     reference: 'T122.407.36.031.00',
     brand: 'Tissot',
