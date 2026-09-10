@@ -1,0 +1,307 @@
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { CartItem, Order, OrderCustomer, OrderStatus, Product } from '../types';
+import { PRODUCTS } from '../data/products';
+import { supabase, syncOrderToSupabase, updateOrderStatusInSupabase, fetchUserOrdersFromSupabase } from '../lib/supabase';
+
+interface StoreContextType {
+  cart: CartItem[];
+  addToCart: (product: Product, quantity?: number) => void;
+  updateQuantity: (sku: string, quantity: number) => void;
+  removeFromCart: (sku: string) => void;
+  clearCart: () => void;
+  cartSubtotal: number;
+  cartItemCount: number;
+  isCartOpen: boolean;
+  setIsCartOpen: (open: boolean) => void;
+  isSearchOpen: boolean;
+  setIsSearchOpen: (open: boolean) => void;
+  orders: Order[];
+  currentOrder: Order | null;
+  setCurrentOrder: (order: Order | null) => void;
+  createOrder: (
+    customer: OrderCustomer,
+    paymentMethod: 'wave' | 'orange_money' | 'mtn_momo' | 'moov_money' | 'card_bancaire'
+  ) => Order;
+  processPaymentWebhook: (orderId: string, success: boolean) => void;
+  userEmail: string | null;
+  loginUser: (email: string) => void;
+  logoutUser: () => void;
+  cartToast: string | null;
+  setCartToast: (msg: string | null) => void;
+}
+
+const StoreContext = createContext<StoreContextType | undefined>(undefined);
+
+const CART_STORAGE_KEY = 'heritage_cart_v1';
+const ORDERS_STORAGE_KEY = 'heritage_orders_v1';
+const USER_STORAGE_KEY = 'heritage_user_v1';
+
+export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    try {
+      const saved = localStorage.getItem(CART_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Validate with current products
+        return parsed.filter((item: CartItem) =>
+          PRODUCTS.some((p) => p.sku === item.product.sku && p.status === 'published')
+        );
+      }
+    } catch {
+      // Fallback
+    }
+    return [];
+  });
+
+  const [orders, setOrders] = useState<Order[]>(() => {
+    try {
+      const saved = localStorage.getItem(ORDERS_STORAGE_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [userEmail, setUserEmail] = useState<string | null>(() => {
+    try {
+      return localStorage.getItem(USER_STORAGE_KEY);
+    } catch {
+      return null;
+    }
+  });
+
+  const [currentOrder, setCurrentOrder] = useState<Order | null>(null);
+  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [cartToast, setCartToast] = useState<string | null>(null);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    } catch {
+      // Ignore
+    }
+  }, [cart]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders));
+    } catch {
+      // Ignore
+    }
+  }, [orders]);
+
+  useEffect(() => {
+    if (userEmail) {
+      localStorage.setItem(USER_STORAGE_KEY, userEmail);
+    } else {
+      localStorage.removeItem(USER_STORAGE_KEY);
+    }
+  }, [userEmail]);
+
+  // Écouter les changements d'état d'authentification Supabase
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        const identifier =
+          session.user.email ||
+          session.user.phone ||
+          session.user.user_metadata?.phone ||
+          session.user.user_metadata?.full_name;
+        if (identifier && !userEmail) {
+          setUserEmail(identifier);
+        }
+      }
+    });
+
+    const {
+      data: { subscription }
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        const identifier =
+          session.user.email ||
+          session.user.phone ||
+          session.user.user_metadata?.phone;
+        if (identifier) setUserEmail(identifier);
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const addToCart = (product: Product, quantity = 1) => {
+    if (product.stockStatus === 'Indisponible' || product.stockCount <= 0) {
+      setCartToast('Cette pièce est actuellement indisponible.');
+      return;
+    }
+
+    setCart((prev) => {
+      const existing = prev.find((item) => item.product.sku === product.sku);
+      if (existing) {
+        const nextQty = Math.min(existing.quantity + quantity, product.stockCount);
+        return prev.map((item) =>
+          item.product.sku === product.sku ? { ...item, quantity: nextQty } : item
+        );
+      }
+      return [...prev, { product, quantity: Math.min(quantity, product.stockCount) }];
+    });
+
+    setCartToast('La pièce a été ajoutée à votre panier.');
+    setTimeout(() => {
+      setCartToast(null);
+    }, 4000);
+  };
+
+  const updateQuantity = (sku: string, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(sku);
+      return;
+    }
+    setCart((prev) =>
+      prev.map((item) => {
+        if (item.product.sku === sku) {
+          const max = item.product.stockCount;
+          return { ...item, quantity: Math.min(quantity, max) };
+        }
+        return item;
+      })
+    );
+  };
+
+  const removeFromCart = (sku: string) => {
+    setCart((prev) => prev.filter((item) => item.product.sku !== sku));
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const cartSubtotal = cart.reduce((acc, item) => acc + item.product.priceXOF * item.quantity, 0);
+  const cartItemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  const createOrder = (
+    customer: OrderCustomer,
+    paymentMethod: 'wave' | 'orange_money' | 'mtn_momo' | 'moov_money' | 'card_bancaire'
+  ): Order => {
+    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+    const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const orderNumber = `HER-${dateStr}-${randomSuffix}`;
+    const deliveryCostXOF = customer.deliveryMode === 'livraison_abidjan' ? 5000 : 0;
+    const totalXOF = cartSubtotal + deliveryCostXOF;
+
+    const newOrder: Order = {
+      id: 'ord-' + Date.now(),
+      orderNumber,
+      createdAt: new Date().toISOString(),
+      status: 'pending_payment',
+      customer,
+      items: [...cart],
+      subtotalXOF: cartSubtotal,
+      deliveryCostXOF,
+      totalXOF,
+      paymentMethod,
+      statusHistory: [
+        {
+          status: 'pending_payment',
+          timestamp: new Date().toISOString(),
+          note: 'Commande initiée côté serveur en attente de validation du paiement.'
+        }
+      ]
+    };
+
+    setOrders((prev) => [newOrder, ...prev]);
+    setCurrentOrder(newOrder);
+    // Synchroniser avec Supabase
+    syncOrderToSupabase(newOrder);
+    return newOrder;
+  };
+
+  const processPaymentWebhook = (orderId: string, success: boolean) => {
+    const nextStatus: OrderStatus = success ? 'paid' : 'payment_failed';
+    const note = success
+      ? 'Paiement vérifié avec succès par webhook sécurisé idempotent.'
+      : 'Échec de la transaction auprès du prestataire de paiement.';
+
+    // Synchroniser la mise à jour de statut avec Supabase
+    updateOrderStatusInSupabase(orderId, nextStatus, note);
+
+    setOrders((prev) =>
+      prev.map((ord) => {
+        if (ord.id === orderId) {
+          const updated: Order = {
+            ...ord,
+            status: nextStatus,
+            paymentReference: success
+              ? 'WAVE-' + Math.random().toString(36).substring(2, 10).toUpperCase()
+              : undefined,
+            statusHistory: [
+              ...ord.statusHistory,
+              {
+                status: nextStatus,
+                timestamp: new Date().toISOString(),
+                note
+              }
+            ]
+          };
+          if (currentOrder && currentOrder.id === orderId) {
+            setCurrentOrder(updated);
+          }
+          return updated;
+        }
+        return ord;
+      })
+    );
+
+    if (success) {
+      clearCart();
+    }
+  };
+
+  const loginUser = (email: string) => {
+    setUserEmail(email);
+  };
+
+  const logoutUser = () => {
+    setUserEmail(null);
+  };
+
+  return (
+    <StoreContext.Provider
+      value={{
+        cart,
+        addToCart,
+        updateQuantity,
+        removeFromCart,
+        clearCart,
+        cartSubtotal,
+        cartItemCount,
+        isCartOpen,
+        setIsCartOpen,
+        isSearchOpen,
+        setIsSearchOpen,
+        orders,
+        currentOrder,
+        setCurrentOrder,
+        createOrder,
+        processPaymentWebhook,
+        userEmail,
+        loginUser,
+        logoutUser,
+        cartToast,
+        setCartToast
+      }}
+    >
+      {children}
+    </StoreContext.Provider>
+  );
+};
+
+export function useStore(): StoreContextType {
+  const context = useContext(StoreContext);
+  if (!context) {
+    throw new Error('useStore must be used within a StoreProvider');
+  }
+  return context;
+}

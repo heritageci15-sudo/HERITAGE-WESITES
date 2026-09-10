@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <radialGradient id="shadowWash" cx="75%" cy="85%" r="60%">
+      <stop offset="0%" stop-color="#002141" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#FAF9F7" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#shadowWash)" />
+  <!-- Watch dial graduation pattern in lower-right corner -->
+  <g transform="translate(1050, 720)" stroke="#AC854B" stroke-opacity="0.07">
+    <circle cx="0" cy="0" r="320" fill="none" stroke-width="0.8" />
+    <circle cx="0" cy="0" r="300" fill="none" stroke-width="0.5" />
+    <circle cx="0" cy="0" r="280" fill="none" stroke-width="0.4" />
+    <circle cx="0" cy="0" r="200" fill="none" stroke-width="0.4" stroke-dasharray="2 6" />
+    <!-- Radiating index marks -->
+    <path d="M0 -320 L0 -305 M-82 -309 L-78 -295 M-160 -277 L-152 -264 M-226 -226 L-215 -215 M-277 -160 L-264 -152 M-309 -82 L-295 -78 M-320 0 L-305 0" stroke-width="1.2" />
+    <path d="M0 -320 L0 -290 M-226 -226 L-205 -205 M-320 0 L-290 0" stroke-width="1.8" />
+  </g>
+</svg>

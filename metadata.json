@@ -1,0 +1,6 @@
+{
+  "name": "HERITAGE",
+  "description": "Maison e-commerce premium de montres, parfums, lunettes et accessoires à Abidjan. Portez aujourd'hui ce que vous transmettrez demain.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

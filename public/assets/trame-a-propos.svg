@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <!-- Subtle circular dial-inspired contour cropped at the edge in gold thin lines -->
+  <g transform="translate(1100, 337)" stroke="#AC854B" stroke-opacity="0.06">
+    <circle cx="0" cy="0" r="450" fill="none" stroke-width="1" />
+    <circle cx="0" cy="0" r="420" fill="none" stroke-width="0.6" stroke-dasharray="3 9" />
+    <circle cx="0" cy="0" r="380" fill="none" stroke-width="0.8" />
+    <circle cx="0" cy="0" r="260" fill="none" stroke-width="0.5" />
+    <line x1="-450" y1="0" x2="-380" y2="0" stroke-width="1.5" />
+    <line x1="0" y1="-450" x2="0" y2="-380" stroke-width="1.5" />
+    <line x1="0" y1="380" x2="0" y2="450" stroke-width="1.5" />
+  </g>
+</svg>

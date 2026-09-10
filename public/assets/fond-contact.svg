@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <!-- Minimal line that turns once toward a small gold point -->
+  <path d="M100 120 L820 120 L820 480" stroke="#002141" stroke-opacity="0.05" stroke-width="1.2" stroke-dasharray="4 6" />
+  <circle cx="820" cy="480" r="4" fill="#AC854B" fill-opacity="0.4" />
+  <circle cx="820" cy="480" r="1.5" fill="#AC854B" />
+</svg>
