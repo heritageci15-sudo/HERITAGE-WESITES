@@ -13,7 +13,7 @@ import { CategoriesSection } from './components/home/CategoriesSection';
 import { CuratedSelection } from './components/home/CuratedSelection';
 import { HouseStory } from './components/home/HouseStory';
 import { MethodSection } from './components/home/MethodSection';
-import { JournalSection } from './components/home/JournalSection';
+import { BlogSection } from './components/home/BlogSection';
 import { LocalAdvice } from './components/home/LocalAdvice';
 
 // App pages
@@ -26,7 +26,7 @@ import { AccountView } from './components/account/AccountView';
 import { AdminPortalView } from './components/admin/AdminPortalView';
 import { AboutView } from './components/pages/AboutView';
 import { AuthenticityView } from './components/pages/AuthenticityView';
-import { JournalView } from './components/pages/JournalView';
+import { BlogView } from './components/pages/BlogView';
 import { ContactView } from './components/pages/ContactView';
 import { LegalView } from './components/pages/LegalView';
 
@@ -79,7 +79,7 @@ function AppContent() {
           <CuratedSelection navigate={navigate} />
           <HouseStory navigate={navigate} />
           <MethodSection navigate={navigate} />
-          <JournalSection navigate={navigate} />
+          <BlogSection navigate={navigate} />
           <LocalAdvice navigate={navigate} />
         </main>
       );
@@ -148,8 +148,8 @@ function AppContent() {
       return <AuthenticityView navigate={navigate} />;
     }
 
-    if (currentRoute === '/journal') {
-      return <JournalView navigate={navigate} />;
+    if (currentRoute === '/blogs' || currentRoute === '/blog') {
+      return <BlogView navigate={navigate} />;
     }
 
     if (currentRoute === '/contact') {

@@ -89,7 +89,7 @@ export const AuthenticityView: React.FC<AuthenticityViewProps> = ({ navigate }) 
               },
               {
                 title: 'Test de précision chronométrique',
-                desc: 'Vérification de la dérive journalière et de l\'amplitude du balancier selon les normes de tolérance horlogères.'
+                desc: 'Vérification de la dérive quotidienne et de l\'amplitude du balancier selon les normes de tolérance horlogères.'
               },
               {
                 title: 'Vérification de la réserve de marche',

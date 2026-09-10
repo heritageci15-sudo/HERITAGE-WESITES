@@ -1,27 +1,26 @@
 import React from 'react';
-import { JOURNAL_ARTICLES } from '../../data/journal';
+import { BLOG_ARTICLES } from '../../data/blog';
 import { ArrowRight, BookOpen } from 'lucide-react';
 
-interface JournalSectionProps {
+interface BlogSectionProps {
   navigate: (route: string) => void;
 }
 
-export const JournalSection: React.FC<JournalSectionProps> = ({ navigate }) => {
-  const article = JOURNAL_ARTICLES[0];
+export const BlogSection: React.FC<BlogSectionProps> = ({ navigate }) => {
+  const article = BLOG_ARTICLES[0];
 
   return (
     <section className="py-20 md:py-28 bg-[#FAF9F7] border-b border-[#002141]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12 md:mb-16">
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#AC854B] block mb-2">
-            LE JOURNAL HERITAGE
+            LE BLOG HERITAGE
           </span>
           <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold text-[#002141] leading-tight mb-4">
-            Mieux choisir avant de porter
+            Guides, Savoir-faire & Inspirations
           </h2>
           <p className="text-sm md:text-base text-[#3A3A3A] leading-relaxed">
-            Nos guides éditoriaux pour approfondir l'art horloger, comprendre les mécanismes et
-            faire un choix pérenne.
+            Nos articles et chroniques pour approfondir l'artisanat d'art, choisir vos garde-temps, lunettes de créateur et parfums d'exception.
           </p>
         </div>
 
@@ -30,7 +29,7 @@ export const JournalSection: React.FC<JournalSectionProps> = ({ navigate }) => {
           <div className="lg:col-span-5 relative aspect-16/10 lg:aspect-auto overflow-hidden bg-[#002141]">
             <img
               src={article.coverImage}
-              alt="Mouvement automatique Le Locle"
+              alt={article.title}
               className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-500"
             />
           </div>
@@ -39,7 +38,7 @@ export const JournalSection: React.FC<JournalSectionProps> = ({ navigate }) => {
             <div>
               <div className="flex items-center gap-3 text-xs text-[#3A3A3A]/70 mb-4">
                 <span className="font-bold uppercase tracking-wider text-[#AC854B]">
-                  Guide Horloger
+                  {article.category}
                 </span>
                 <span>&middot;</span>
                 <span>{article.readingTime}</span>
@@ -61,11 +60,11 @@ export const JournalSection: React.FC<JournalSectionProps> = ({ navigate }) => {
             <div className="pt-8 mt-6 border-t border-[#002141]/10 flex items-center justify-between">
               <button
                 type="button"
-                id="journal-read-guide"
-                onClick={() => navigate('/journal')}
+                id="blog-read-guide"
+                onClick={() => navigate('/blogs')}
                 className="inline-flex items-center gap-3 px-6 py-3 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] transition-colors cursor-pointer group"
               >
-                <span>LIRE LE GUIDE</span>
+                <span>LIRE L'ARTICLE DU BLOG</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
 

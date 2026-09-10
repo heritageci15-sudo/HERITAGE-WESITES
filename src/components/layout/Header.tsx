@@ -34,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
   const navLinks = [
     { label: 'ACCUEIL', route: '/' },
     { label: 'BOUTIQUE', route: '/boutique' },
-    { label: 'JOURNAL', route: '/journal' },
+    { label: 'BLOGS', route: '/blogs' },
     { label: 'À PROPOS', route: '/a-propos' },
     { label: 'CONTACT', route: '/contact' }
   ];
@@ -112,7 +112,8 @@ export const Header: React.FC<HeaderProps> = ({
                 item.route === '/'
                   ? currentRoute === '/'
                   : currentRoute.startsWith(item.route) ||
-                    (item.route === '/boutique' && (currentRoute === '/montres' || currentRoute.startsWith('/montres')));
+                    (item.route === '/boutique' && (currentRoute === '/montres' || currentRoute.startsWith('/montres'))) ||
+                    (item.route === '/blogs' && (currentRoute === '/blogs' || currentRoute.startsWith('/blogs') || currentRoute === '/blog'));
               return (
                 <button
                   key={item.route}
@@ -227,7 +228,8 @@ export const Header: React.FC<HeaderProps> = ({
                   }}
                   className={`text-left text-sm font-semibold tracking-[0.14em] uppercase py-2 cursor-pointer ${
                     currentRoute === item.route ||
-                    (item.route === '/boutique' && (currentRoute === '/montres' || currentRoute.startsWith('/montres')))
+                    (item.route === '/boutique' && (currentRoute === '/montres' || currentRoute.startsWith('/montres'))) ||
+                    (item.route === '/blogs' && (currentRoute === '/blogs' || currentRoute.startsWith('/blogs') || currentRoute === '/blog'))
                       ? 'text-[#AC854B] font-bold'
                       : 'text-[#002141] hover:text-[#AC854B]'
                   }`}

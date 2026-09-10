@@ -156,10 +156,10 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
               <li>
                 <button
                   type="button"
-                  onClick={() => navigate('/journal')}
+                  onClick={() => navigate('/blogs')}
                   className="hover:text-[#FAF9F7] transition-colors cursor-pointer text-left"
                 >
-                  Guide : Automatique ou Quartz
+                  Articles &amp; Guides du Blog
                 </button>
               </li>
               <li>
