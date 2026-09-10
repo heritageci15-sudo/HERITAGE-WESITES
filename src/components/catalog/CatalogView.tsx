@@ -135,7 +135,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({ navigate, initialBrand
             Accueil
           </button>
           <span>/</span>
-          <span className="text-[#002141] font-semibold">Montres</span>
+          <span className="text-[#002141] font-semibold">Boutique</span>
           {initialBrand && (
             <>
               <span>/</span>
@@ -147,12 +147,11 @@ export const CatalogView: React.FC<CatalogViewProps> = ({ navigate, initialBrand
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
           <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-[#002141] leading-tight mb-4">
-            {initialBrand ? `Montres ${initialBrand} à Abidjan` : 'Montres à Abidjan'}
+            {initialBrand ? `Montres ${initialBrand} à Abidjan` : 'La Boutique HERITAGE'}
           </h1>
           <p className="text-sm sm:text-base text-[#3A3A3A] leading-relaxed mb-4">
-            Découvrez des montres choisies pour leur précision, leur facture et leur capacité à
-            accompagner le temps. Chaque fiche publiée présente une référence, des
-            caractéristiques utiles, un prix en FCFA et un statut de disponibilité.
+            Découvrez nos pièces sélectionnées à Abidjan pour leur précision, leur facture et leur capacité à
+            accompagner le temps. Montres de manufacture, créations horlogères, parfums et accessoires de prestige.
           </p>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#E8E1D3]/50 text-xs font-semibold text-[#002141]">
             <span>{filteredProducts.length} pièces disponibles à découvrir</span>

@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   const navLinks = [
     { label: 'ACCUEIL', route: '/' },
-    { label: 'MONTRES', route: '/montres' },
+    { label: 'BOUTIQUE', route: '/boutique' },
     { label: 'JOURNAL', route: '/journal' },
     { label: 'À PROPOS', route: '/a-propos' },
     { label: 'CONTACT', route: '/contact' }
@@ -111,7 +111,8 @@ export const Header: React.FC<HeaderProps> = ({
               const isActive =
                 item.route === '/'
                   ? currentRoute === '/'
-                  : currentRoute.startsWith(item.route);
+                  : currentRoute.startsWith(item.route) ||
+                    (item.route === '/boutique' && (currentRoute === '/montres' || currentRoute.startsWith('/montres')));
               return (
                 <button
                   key={item.route}
@@ -225,7 +226,8 @@ export const Header: React.FC<HeaderProps> = ({
                     setIsMobileMenuOpen(false);
                   }}
                   className={`text-left text-sm font-semibold tracking-[0.14em] uppercase py-2 cursor-pointer ${
-                    currentRoute === item.route
+                    currentRoute === item.route ||
+                    (item.route === '/boutique' && (currentRoute === '/montres' || currentRoute.startsWith('/montres')))
                       ? 'text-[#AC854B] font-bold'
                       : 'text-[#002141] hover:text-[#AC854B]'
                   }`}

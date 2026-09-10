@@ -85,11 +85,11 @@ function AppContent() {
       );
     }
 
-    if (currentRoute === '/montres') {
+    if (currentRoute === '/montres' || currentRoute === '/boutique') {
       return <CatalogView navigate={navigate} />;
     }
 
-    if (currentRoute === '/montres/tissot') {
+    if (currentRoute === '/montres/tissot' || currentRoute === '/boutique/tissot') {
       return <CatalogView navigate={navigate} initialBrand="Tissot" />;
     }
 
