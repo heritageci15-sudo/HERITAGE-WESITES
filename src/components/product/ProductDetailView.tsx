@@ -10,8 +10,11 @@ import {
   ShoppingBag,
   Check,
   ChevronRight,
-  ZoomIn
+  ZoomIn,
+  Heart,
+  Share2
 } from 'lucide-react';
+import { ShareModal } from './ShareModal';
 
 interface ProductDetailViewProps {
   product: Product;
@@ -19,11 +22,13 @@ interface ProductDetailViewProps {
 }
 
 export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, navigate }) => {
-  const { addToCart } = useStore();
+  const { addToCart, isInWishlist, toggleWishlist } = useStore();
+  const isFavorite = isInWishlist(product.id);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isZoomed, setIsZoomed] = useState(false);
   const [addedNotice, setAddedNotice] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const images = product.additionalImages.length > 0
     ? product.additionalImages
@@ -116,10 +121,34 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, n
                 />
               </div>
 
-              {/* Zoom hint */}
-              <div className="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 bg-[#FAF9F7]/90 text-[10px] text-[#3A3A3A] border border-[#002141]/10 pointer-events-none">
-                <ZoomIn className="w-3.5 h-3.5 text-[#AC854B]" />
-                <span>Cliquer pour agrandir</span>
+              {/* Zoom hint, Share & Wishlist quick buttons */}
+              <div className="absolute top-4 right-4 flex items-center gap-2">
+                <button
+                  type="button"
+                  id="pdp-quick-share"
+                  onClick={() => setIsShareModalOpen(true)}
+                  aria-label="Partager cette pièce"
+                  title="Partager cette pièce"
+                  className="p-2 rounded-full border shadow-xs bg-[#FAF9F7]/90 hover:bg-white text-[#002141] hover:text-[#AC854B] border-[#002141]/10 transition-colors cursor-pointer"
+                >
+                  <Share2 className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => toggleWishlist(product)}
+                  aria-label={isFavorite ? 'Retirer de la liste d\'envies' : 'Ajouter à la liste d\'envies'}
+                  className={`p-2 rounded-full border shadow-xs transition-colors cursor-pointer ${
+                    isFavorite
+                      ? 'bg-white text-[#AC854B] border-[#AC854B]/50'
+                      : 'bg-[#FAF9F7]/90 hover:bg-white text-[#002141] hover:text-[#AC854B] border-[#002141]/10'
+                  }`}
+                >
+                  <Heart className={`w-4 h-4 ${isFavorite ? 'fill-[#AC854B] text-[#AC854B]' : ''}`} />
+                </button>
+                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-[#FAF9F7]/90 text-[10px] text-[#3A3A3A] border border-[#002141]/10 pointer-events-none">
+                  <ZoomIn className="w-3.5 h-3.5 text-[#AC854B]" />
+                  <span>Agrandir</span>
+                </div>
               </div>
 
               {/* Status pill */}
@@ -239,6 +268,33 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, n
                 <MessageCircle className="w-4 h-4 text-[#AC854B]" />
                 <span>ÉCHANGER AVEC UN CONSEILLER</span>
               </a>
+
+              {/* Secondary Actions: Wishlist & Share */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <button
+                  type="button"
+                  id="pdp-toggle-wishlist"
+                  onClick={() => toggleWishlist(product)}
+                  className={`w-full py-3 px-4 border text-xs font-bold uppercase tracking-[0.14em] transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                    isFavorite
+                      ? 'bg-[#AC854B]/10 border-[#AC854B] text-[#AC854B]'
+                      : 'bg-white hover:bg-[#FAF9F7] text-[#002141] border-[#002141]/20 hover:border-[#AC854B]'
+                  }`}
+                >
+                  <Heart className={`w-4 h-4 transition-colors ${isFavorite ? 'fill-[#AC854B] text-[#AC854B]' : ''}`} />
+                  <span className="truncate">{isFavorite ? 'DANS VOS FAVORIS' : 'AJOUTER AUX FAVORIS'}</span>
+                </button>
+
+                <button
+                  type="button"
+                  id="pdp-open-share"
+                  onClick={() => setIsShareModalOpen(true)}
+                  className="w-full py-3 px-4 bg-white hover:bg-[#FAF9F7] text-[#002141] border border-[#002141]/20 hover:border-[#AC854B] text-xs font-bold uppercase tracking-[0.14em] transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Share2 className="w-4 h-4 text-[#AC854B]" />
+                  <span>PARTAGER LA PIÈCE</span>
+                </button>
+              </div>
 
               {/* Mandatory Micro-copy */}
               <p className="text-[11px] text-[#3A3A3A]/75 text-center leading-relaxed pt-1">
@@ -387,6 +443,13 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, n
           </div>
         </div>
       </div>
+
+      {/* Share Modal Dialog */}
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        product={product}
+      />
     </div>
   );
 };

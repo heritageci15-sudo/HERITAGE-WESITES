@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useStore } from '../../context/StoreContext';
-import { Search, ShoppingBag, Menu, X, User } from 'lucide-react';
+import { Search, ShoppingBag, Menu, X, User, Heart } from 'lucide-react';
 
 interface HeaderProps {
   currentRoute?: string;
@@ -15,7 +15,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSearch,
   onOpenCart,
 }) => {
-  const { cartItemCount, setIsCartOpen, setIsSearchOpen } = useStore();
+  const { cartItemCount, wishlistItemCount, setIsCartOpen, setIsSearchOpen } = useStore();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -170,6 +170,21 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               type="button"
+              id="header-wishlist-button"
+              onClick={() => navigate('/liste-envies')}
+              className="relative p-2.5 rounded-full hover:bg-black/5 transition-colors cursor-pointer text-current flex items-center"
+              aria-label={`Liste d'envies, ${wishlistItemCount} article${wishlistItemCount > 1 ? 's' : ''}`}
+            >
+              <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${wishlistItemCount > 0 ? 'fill-[#AC854B] text-[#AC854B]' : ''}`} />
+              {wishlistItemCount > 0 && (
+                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-[#AC854B] text-[#FAF9F7] text-[10px] font-bold flex items-center justify-center">
+                  {wishlistItemCount}
+                </span>
+              )}
+            </button>
+
+            <button
+              type="button"
               id="header-cart-button"
               onClick={() => {
                 if (onOpenCart) onOpenCart();
@@ -237,6 +252,30 @@ export const Header: React.FC<HeaderProps> = ({
                   {item.label}
                 </button>
               ))}
+
+              <button
+                type="button"
+                id="mobile-nav-wishlist"
+                onClick={() => {
+                  navigate('/liste-envies');
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`flex items-center justify-between text-left text-sm font-semibold tracking-[0.14em] uppercase py-2 cursor-pointer ${
+                  currentRoute === '/liste-envies' || currentRoute === '/wishlist'
+                    ? 'text-[#AC854B] font-bold'
+                    : 'text-[#002141] hover:text-[#AC854B]'
+                }`}
+              >
+                <span className="flex items-center gap-2">
+                  <Heart className={`w-4 h-4 ${wishlistItemCount > 0 ? 'fill-[#AC854B] text-[#AC854B]' : ''}`} />
+                  LISTE D'ENVIES
+                </span>
+                {wishlistItemCount > 0 && (
+                  <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-[#AC854B] text-[#FAF9F7]">
+                    {wishlistItemCount}
+                  </span>
+                )}
+              </button>
             </nav>
 
             <div className="mt-auto pt-6 border-t border-[#002141]/10 text-xs text-[#3A3A3A] space-y-3">

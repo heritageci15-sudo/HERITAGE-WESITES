@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, ArrowRight, Eye } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Eye, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
-import { formatXOF } from '../../data/products';
+import { formatXOF, PRODUCTS } from '../../data/products';
+import { useStore } from '../../context/StoreContext';
 
 interface SignaturePiecesSectionProps {
   navigate: (route: string) => void;
@@ -100,6 +101,7 @@ const CENTER_CYCLE = Math.floor(REPEAT_COUNT / 2);
 const INITIAL_INDEX = CENTER_CYCLE * BASE_COUNT + 1;
 
 export const SignaturePiecesSection: React.FC<SignaturePiecesSectionProps> = ({ navigate }) => {
+  const { isInWishlist, toggleWishlist } = useStore();
   const [activeIndex, setActiveIndex] = useState(INITIAL_INDEX);
   const [withAnimation, setWithAnimation] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -294,6 +296,33 @@ export const SignaturePiecesSection: React.FC<SignaturePiecesSectionProps> = ({ 
                       }`}
                       style={{ aspectRatio: '1 / 1.08' }}
                     >
+                      {/* Wishlist Button */}
+                      {(() => {
+                        const product = PRODUCTS.find((p) => p.id === item.id || p.slug === item.slug);
+                        const isFav = product ? isInWishlist(product.id) : false;
+                        return (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (product) toggleWishlist(product);
+                            }}
+                            aria-label={
+                              isFav
+                                ? `Retirer ${item.title} de la liste d'envies`
+                                : `Ajouter ${item.title} à la liste d'envies`
+                            }
+                            className={`absolute top-3 left-3 p-1.5 rounded-full border shadow-xs transition-colors cursor-pointer z-20 ${
+                              isFav
+                                ? 'bg-white text-[#AC854B] border-[#AC854B]/40 scale-105'
+                                : 'bg-white/85 hover:bg-white text-[#002141]/60 hover:text-[#AC854B] border-[#002141]/10'
+                            }`}
+                          >
+                            <Heart className={`w-3.5 h-3.5 ${isFav ? 'fill-[#AC854B] text-[#AC854B]' : ''}`} />
+                          </button>
+                        );
+                      })()}
+
                       {/* Center Item Badge */}
                       {isCenter && item.badge && (
                         <div className="absolute top-3 right-3 bg-[#002141] text-[#FAF9F7] text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 z-10 shadow-xs">
@@ -361,7 +390,7 @@ export const SignaturePiecesSection: React.FC<SignaturePiecesSectionProps> = ({ 
                             id={`signature-view-details-${uniqueKey}`}
                             onClick={(e) => {
                               e.stopPropagation();
-                              navigate(`/montre/${item.slug}`);
+                              navigate(`/montres/${item.slug}`);
                             }}
                             className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-[#AC854B] hover:text-[#002141] transition-colors cursor-pointer"
                           >

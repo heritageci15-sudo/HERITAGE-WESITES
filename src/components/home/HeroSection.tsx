@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, MessageCircle, Pause, Play } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface HeroSectionProps {
   navigate: (route: string) => void;
@@ -83,7 +84,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ navigate }) => {
 
       {/* Main Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 md:py-24">
-        <div className="max-w-2xl text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-2xl text-left"
+        >
           {/* Brand Eyebrow */}
           <div className="inline-flex items-center gap-2 mb-4">
             <span className="w-6 h-[1.5px] bg-[#D6BB8F]" />
@@ -125,7 +131,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ navigate }) => {
               <span>ÉCHANGER AVEC UN CONSEILLER</span>
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Motion / Pause Control for Accessibility */}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Product } from '../../types';
 import { formatXOF } from '../../data/products';
 import { useStore } from '../../context/StoreContext';
-import { ArrowRight, ShoppingBag } from 'lucide-react';
+import { ArrowRight, ShoppingBag, Heart } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -10,7 +10,8 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, navigate }) => {
-  const { addToCart } = useStore();
+  const { addToCart, isInWishlist, toggleWishlist } = useStore();
+  const isFavorite = isInWishlist(product.id);
 
   const handleCardClick = () => {
     navigate(`/montres/${product.slug}`);
@@ -19,6 +20,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, navigate }) =
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
     addToCart(product, 1);
+  };
+
+  const handleToggleWishlist = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    toggleWishlist(product);
   };
 
   return (
@@ -49,6 +55,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, navigate }) =
             {product.stockStatus}
           </span>
         </div>
+
+        {/* Wishlist Heart Button */}
+        <button
+          type="button"
+          onClick={handleToggleWishlist}
+          aria-label={isFavorite ? `Retirer ${product.name} de la liste d'envies` : `Ajouter ${product.name} à la liste d'envies`}
+          className={`absolute top-3 right-3 p-2 rounded-full shadow-xs border transition-all duration-200 cursor-pointer z-10 ${
+            isFavorite
+              ? 'bg-white text-[#AC854B] border-[#AC854B]/40 scale-105'
+              : 'bg-white/85 hover:bg-white text-[#002141]/60 hover:text-[#AC854B] border-[#002141]/10'
+          }`}
+        >
+          <Heart className={`w-4 h-4 transition-colors ${isFavorite ? 'fill-[#AC854B] text-[#AC854B]' : ''}`} />
+        </button>
 
         {/* Quick Add Button overlay */}
         <button

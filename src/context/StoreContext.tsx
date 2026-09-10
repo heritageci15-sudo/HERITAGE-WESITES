@@ -28,6 +28,13 @@ interface StoreContextType {
   logoutUser: () => void;
   cartToast: string | null;
   setCartToast: (msg: string | null) => void;
+  wishlist: string[];
+  isInWishlist: (productId: string) => boolean;
+  toggleWishlist: (product: Product) => void;
+  addToWishlist: (product: Product) => void;
+  removeFromWishlist: (productId: string) => void;
+  clearWishlist: () => void;
+  wishlistItemCount: number;
 }
 
 const StoreContext = createContext<StoreContextType | undefined>(undefined);
@@ -35,6 +42,7 @@ const StoreContext = createContext<StoreContextType | undefined>(undefined);
 const CART_STORAGE_KEY = 'heritage_cart_v1';
 const ORDERS_STORAGE_KEY = 'heritage_orders_v1';
 const USER_STORAGE_KEY = 'heritage_user_v1';
+const WISHLIST_STORAGE_KEY = 'heritage_wishlist_v1';
 
 export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
@@ -74,6 +82,29 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [cartToast, setCartToast] = useState<string | null>(null);
+
+  const [wishlist, setWishlist] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem(WISHLIST_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed.filter((id: string) => PRODUCTS.some((p) => p.id === id));
+        }
+      }
+    } catch {
+      // Fallback
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(wishlist));
+    } catch {
+      // Ignore
+    }
+  }, [wishlist]);
 
   useEffect(() => {
     try {
@@ -267,6 +298,55 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setUserEmail(null);
   };
 
+  const isInWishlist = (productId: string): boolean => {
+    return wishlist.includes(productId);
+  };
+
+  const toggleWishlist = (product: Product) => {
+    setWishlist((prev) => {
+      const exists = prev.includes(product.id);
+      if (exists) {
+        setCartToast(`« ${product.name} » a été retiré de votre liste d'envies.`);
+        setTimeout(() => setCartToast(null), 3500);
+        return prev.filter((id) => id !== product.id);
+      } else {
+        setCartToast(`« ${product.name} » a été ajouté à votre liste d'envies.`);
+        setTimeout(() => setCartToast(null), 3500);
+        return [...prev, product.id];
+      }
+    });
+  };
+
+  const addToWishlist = (product: Product) => {
+    setWishlist((prev) => {
+      if (!prev.includes(product.id)) {
+        setCartToast(`« ${product.name} » a été ajouté à votre liste d'envies.`);
+        setTimeout(() => setCartToast(null), 3500);
+        return [...prev, product.id];
+      }
+      return prev;
+    });
+  };
+
+  const removeFromWishlist = (productId: string) => {
+    setWishlist((prev) => {
+      const targetProduct = PRODUCTS.find((p) => p.id === productId);
+      if (targetProduct) {
+        setCartToast(`« ${targetProduct.name} » a été retiré de votre liste d'envies.`);
+        setTimeout(() => setCartToast(null), 3500);
+      }
+      return prev.filter((id) => id !== productId);
+    });
+  };
+
+  const clearWishlist = () => {
+    setWishlist([]);
+    setCartToast("Votre liste d'envies a été vidée.");
+    setTimeout(() => setCartToast(null), 3500);
+  };
+
+  const wishlistItemCount = wishlist.length;
+
   return (
     <StoreContext.Provider
       value={{
@@ -290,7 +370,14 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         loginUser,
         logoutUser,
         cartToast,
-        setCartToast
+        setCartToast,
+        wishlist,
+        isInWishlist,
+        toggleWishlist,
+        addToWishlist,
+        removeFromWishlist,
+        clearWishlist,
+        wishlistItemCount
       }}
     >
       {children}

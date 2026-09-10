@@ -16,10 +16,12 @@ import { HouseStory } from './components/home/HouseStory';
 import { MethodSection } from './components/home/MethodSection';
 import { BlogSection } from './components/home/BlogSection';
 import { LocalAdvice } from './components/home/LocalAdvice';
+import { ScrollFadeSection } from './components/common/ScrollFadeSection';
 
 // App pages
 import { CatalogView } from './components/catalog/CatalogView';
 import { ProductDetailView } from './components/product/ProductDetailView';
+import { WishlistView } from './components/wishlist/WishlistView';
 import { CartView } from './components/cart/CartView';
 import { CheckoutView } from './components/checkout/CheckoutView';
 import { ConfirmationView } from './components/checkout/ConfirmationView';
@@ -74,15 +76,41 @@ function AppContent() {
     if (currentRoute === '/' || currentRoute === '') {
       return (
         <main id="main-content">
-          <HeroSection navigate={navigate} />
-          <SignaturePiecesSection navigate={navigate} />
-          <TrustMarkers />
-          <CategoriesSection navigate={navigate} />
-          <CuratedSelection navigate={navigate} />
-          <HouseStory navigate={navigate} />
-          <MethodSection navigate={navigate} />
-          <BlogSection navigate={navigate} />
-          <LocalAdvice navigate={navigate} />
+          <ScrollFadeSection duration={0.8} yOffset={12}>
+            <HeroSection navigate={navigate} />
+          </ScrollFadeSection>
+
+          <ScrollFadeSection>
+            <SignaturePiecesSection navigate={navigate} />
+          </ScrollFadeSection>
+
+          <ScrollFadeSection>
+            <TrustMarkers />
+          </ScrollFadeSection>
+
+          <ScrollFadeSection>
+            <CategoriesSection navigate={navigate} />
+          </ScrollFadeSection>
+
+          <ScrollFadeSection>
+            <CuratedSelection navigate={navigate} />
+          </ScrollFadeSection>
+
+          <ScrollFadeSection>
+            <HouseStory navigate={navigate} />
+          </ScrollFadeSection>
+
+          <ScrollFadeSection>
+            <MethodSection navigate={navigate} />
+          </ScrollFadeSection>
+
+          <ScrollFadeSection>
+            <BlogSection navigate={navigate} />
+          </ScrollFadeSection>
+
+          <ScrollFadeSection>
+            <LocalAdvice navigate={navigate} />
+          </ScrollFadeSection>
         </main>
       );
     }
@@ -124,6 +152,14 @@ function AppContent() {
 
     if (currentRoute === '/panier') {
       return <CartView navigate={navigate} />;
+    }
+
+    if (
+      currentRoute === '/liste-envies' ||
+      currentRoute === '/wishlist' ||
+      currentRoute === '/favoris'
+    ) {
+      return <WishlistView navigate={navigate} />;
     }
 
     if (currentRoute === '/commande') {
