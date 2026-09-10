@@ -289,7 +289,7 @@ export const SignaturePiecesSection: React.FC<SignaturePiecesSectionProps> = ({ 
                   >
                     {/* Square Framed Box matching the reference design */}
                     <div
-                      className={`w-full bg-white rounded-none border p-6 sm:p-7 flex items-center justify-center relative overflow-hidden transition-all duration-400 ${
+                      className={`premium-section-card w-full bg-white rounded-none border p-6 sm:p-7 flex items-center justify-center relative overflow-hidden transition-all duration-400 ${
                         isCenter
                           ? 'border-[#002141]/30 shadow-2xl ring-1 ring-[#AC854B]/50'
                           : 'border-[#002141]/10 shadow-xs hover:border-[#002141]/25'
@@ -392,7 +392,7 @@ export const SignaturePiecesSection: React.FC<SignaturePiecesSectionProps> = ({ 
                               e.stopPropagation();
                               navigate(`/montres/${item.slug}`);
                             }}
-                            className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-[#AC854B] hover:text-[#002141] transition-colors cursor-pointer"
+                            className="premium-cta inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-[#AC854B] hover:text-[#002141] cursor-pointer"
                           >
                             <Eye className="w-3.5 h-3.5" />
                             <span>Consulter la fiche</span>
@@ -431,7 +431,7 @@ export const SignaturePiecesSection: React.FC<SignaturePiecesSectionProps> = ({ 
             type="button"
             id="signature-shop-all-watches-btn"
             onClick={() => navigate('/boutique')}
-            className="inline-flex items-center justify-center px-8 py-3.5 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.18em] transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer group"
+            className="premium-cta inline-flex items-center justify-center px-8 py-3.5 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.18em] shadow-sm cursor-pointer group"
           >
             <span>Découvrir Toutes Les Montres</span>
             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />

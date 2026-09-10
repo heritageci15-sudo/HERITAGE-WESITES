@@ -37,7 +37,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigate }) => {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Origin story */}
-        <section className="bg-white border border-[#002141]/10 p-8 sm:p-12 space-y-6">
+        <section className="premium-section-card bg-white border border-[#002141]/10 p-8 sm:p-12 space-y-6">
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#AC854B] block">
             NOTRE HISTOIRE
           </span>
@@ -62,7 +62,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigate }) => {
 
         {/* Pillars */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white border border-[#002141]/10 p-6 space-y-3">
+          <div className="premium-section-card bg-white border border-[#002141]/10 p-6 space-y-3">
             <Compass className="w-6 h-6 text-[#AC854B]" />
             <h3 className="font-playfair text-base font-bold text-[#002141]">
               Sélection rigoureuse
@@ -73,7 +73,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigate }) => {
             </p>
           </div>
 
-          <div className="bg-white border border-[#002141]/10 p-6 space-y-3">
+          <div className="premium-section-card bg-white border border-[#002141]/10 p-6 space-y-3">
             <ShieldCheck className="w-6 h-6 text-[#AC854B]" />
             <h3 className="font-playfair text-base font-bold text-[#002141]">
               Authenticité sans compromis
@@ -84,7 +84,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigate }) => {
             </p>
           </div>
 
-          <div className="bg-white border border-[#002141]/10 p-6 space-y-3">
+          <div className="premium-section-card bg-white border border-[#002141]/10 p-6 space-y-3">
             <HeartHandshake className="w-6 h-6 text-[#AC854B]" />
             <h3 className="font-playfair text-base font-bold text-[#002141]">
               Proximité & Conseil
@@ -97,7 +97,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigate }) => {
         </div>
 
         {/* CTA to Watches */}
-        <div className="bg-[#002141] text-[#FAF9F7] p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="premium-section-card bg-[#002141] text-[#FAF9F7] p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="font-playfair text-xl font-bold mb-2">
               Explorez nos pièces d'exception
@@ -109,7 +109,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ navigate }) => {
           <button
             type="button"
             onClick={() => navigate('/montres')}
-            className="px-8 py-3.5 bg-[#AC854B] hover:bg-[#96723c] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] transition-colors flex items-center gap-3 flex-shrink-0 cursor-pointer"
+            className="premium-cta px-8 py-3.5 bg-[#AC854B] hover:bg-[#96723c] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] flex items-center gap-3 flex-shrink-0 cursor-pointer"
           >
             <span>DÉCOUVRIR LES MONTRES</span>
             <ArrowRight className="w-4 h-4" />

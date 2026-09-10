@@ -55,7 +55,7 @@ export const MethodSection: React.FC<MethodSectionProps> = ({ navigate }) => {
             return (
               <div
                 key={idx}
-                className="p-6 bg-[#FAF9F7] border border-[#002141]/5 flex flex-col justify-between"
+                className="premium-section-card p-6 bg-[#FAF9F7] border border-[#002141]/5 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">

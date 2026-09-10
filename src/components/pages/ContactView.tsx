@@ -53,7 +53,7 @@ export const ContactView: React.FC<ContactViewProps> = ({ navigate }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Contact Details Column */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white border border-[#002141]/10 p-6 sm:p-8 space-y-6">
+            <div className="premium-section-card bg-white border border-[#002141]/10 p-6 sm:p-8 space-y-6">
               <h2 className="font-playfair text-xl font-bold text-[#002141] pb-4 border-b border-[#002141]/10">
                 Coordonnées de la Maison
               </h2>
@@ -115,7 +115,7 @@ export const ContactView: React.FC<ContactViewProps> = ({ navigate }) => {
                   href="https://wa.me/2250707181560?text=Bonjour%20HERITAGE%2C%20je%20souhaite%20un%20conseil%20au%20sujet%20de%20vos%20montres."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#20b858] text-white text-xs font-bold uppercase tracking-[0.16em] transition-colors flex items-center justify-center gap-2.5 shadow-sm"
+                  className="premium-cta w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#20b858] text-white text-xs font-bold uppercase tracking-[0.16em] flex items-center justify-center gap-2.5 shadow-sm"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>CONVERSATION WHATSAPP IMMÉDIATE</span>
@@ -125,7 +125,7 @@ export const ContactView: React.FC<ContactViewProps> = ({ navigate }) => {
           </div>
 
           {/* Form Column */}
-          <div className="lg:col-span-7 bg-white border border-[#002141]/10 p-6 sm:p-10">
+          <div className="premium-section-card lg:col-span-7 bg-white border border-[#002141]/10 p-6 sm:p-10">
             {submitted ? (
               <div className="text-center py-12 space-y-4">
                 <div className="w-14 h-14 mx-auto rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center">
@@ -238,7 +238,7 @@ export const ContactView: React.FC<ContactViewProps> = ({ navigate }) => {
 
                 <button
                   type="submit"
-                  className="w-full py-4 px-6 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.18em] transition-colors flex items-center justify-center gap-3 cursor-pointer shadow-sm"
+                  className="premium-cta w-full py-4 px-6 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.18em] flex items-center justify-center gap-3 cursor-pointer shadow-sm"
                 >
                   <Send className="w-4 h-4" />
                   <span>TRANSMETTRE MON MESSAGE</span>

@@ -25,7 +25,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ navigate }) => {
         </div>
 
         {/* Featured Editorial Card */}
-        <div className="bg-white border border-[#002141]/10 overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-12">
+        <div className="premium-section-card bg-white border border-[#002141]/10 overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-12">
           <div className="lg:col-span-5 relative aspect-16/10 lg:aspect-auto overflow-hidden bg-[#002141]">
             <img
               src={article.coverImage}
@@ -62,7 +62,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ navigate }) => {
                 type="button"
                 id="blog-read-guide"
                 onClick={() => navigate('/blogs')}
-                className="inline-flex items-center gap-3 px-6 py-3 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] transition-colors cursor-pointer group"
+                className="premium-cta inline-flex items-center gap-3 px-6 py-3 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] cursor-pointer group"
               >
                 <span>LIRE L'ARTICLE DU BLOG</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

@@ -184,11 +184,8 @@ export const AccountView: React.FC<AccountViewProps> = ({ navigate }) => {
     setTimeout(() => setSuccessMessage(null), 3000);
   };
 
-  // Déterminer si l'utilisateur est admin
-  const isAdmin =
-    userProfile?.role === 'admin' ||
-    userEmail?.includes('heritageci15@gmail.com') ||
-    userEmail?.includes('admin');
+  // L'accès administrateur dépend uniquement du rôle validé côté Supabase.
+  const isAdmin = userProfile?.role === 'admin';
 
   return (
     <div className="bg-[#FAF9F7] min-h-screen pt-24 pb-24 text-[#002141]">

@@ -9,7 +9,7 @@ export const LocalAdvice: React.FC<LocalAdviceProps> = ({ navigate }) => {
   return (
     <section className="py-20 md:py-28 bg-white border-b border-[#002141]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#002141] text-[#FAF9F7] p-8 md:p-14 lg:p-16 relative overflow-hidden">
+        <div className="premium-section-card bg-[#002141] text-[#FAF9F7] p-8 md:p-14 lg:p-16 relative overflow-hidden">
           {/* Subtle background circle */}
           <div className="absolute -right-24 -bottom-24 w-96 h-96 rounded-full border border-[#D6BB8F]/10 pointer-events-none" />
 
@@ -43,7 +43,7 @@ export const LocalAdvice: React.FC<LocalAdviceProps> = ({ navigate }) => {
                 href="https://wa.me/2250707181560?text=Bonjour%20HERITAGE%2C%20je%20souhaite%20un%20conseil%20au%20sujet%20de%20votre%20s%C3%A9lection%20de%20montres."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-[#AC854B] hover:bg-[#96723c] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] transition-colors flex items-center justify-center gap-3"
+                className="premium-cta px-8 py-4 bg-[#AC854B] hover:bg-[#96723c] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] flex items-center justify-center gap-3"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>ÉCHANGER AVEC HERITAGE</span>
@@ -52,7 +52,7 @@ export const LocalAdvice: React.FC<LocalAdviceProps> = ({ navigate }) => {
               <button
                 type="button"
                 onClick={() => navigate('/contact')}
-                className="px-8 py-4 bg-transparent hover:bg-[#FAF9F7]/10 text-[#FAF9F7] border border-[#FAF9F7]/25 text-xs font-bold uppercase tracking-[0.16em] transition-colors cursor-pointer text-center"
+                className="premium-cta px-8 py-4 bg-transparent hover:bg-[#FAF9F7]/10 text-[#FAF9F7] border border-[#FAF9F7]/25 text-xs font-bold uppercase tracking-[0.16em] cursor-pointer text-center"
               >
                 FORMULAIRE DE CONTACT
               </button>

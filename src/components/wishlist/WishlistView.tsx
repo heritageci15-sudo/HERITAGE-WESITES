@@ -274,7 +274,7 @@ export const WishlistView: React.FC<WishlistViewProps> = ({ navigate }) => {
                 return (
                   <div
                     key={product.id}
-                    className="bg-white border border-[#002141]/10 flex flex-col justify-between overflow-hidden group hover:border-[#AC854B] hover:shadow-md transition-all duration-300 relative"
+                    className="premium-product-card bg-white border border-[#002141]/10 flex flex-col justify-between overflow-hidden group hover:border-[#AC854B] relative"
                   >
                     {/* Visual Container */}
                     <div
@@ -284,7 +284,7 @@ export const WishlistView: React.FC<WishlistViewProps> = ({ navigate }) => {
                       <img
                         src={product.primaryImage}
                         alt={product.name}
-                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 will-change-transform"
+                        className="premium-product-card__image w-full h-full object-contain will-change-transform"
                         loading="lazy"
                       />
 

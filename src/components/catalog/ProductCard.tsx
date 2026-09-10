@@ -30,14 +30,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, navigate }) =
   return (
     <div
       onClick={handleCardClick}
-      className="group bg-white border border-[#002141]/10 flex flex-col justify-between overflow-hidden hover:border-[#AC854B] hover:shadow-md transition-all duration-300 cursor-pointer"
+      className="premium-product-card group bg-white border border-[#002141]/10 flex flex-col justify-between overflow-hidden hover:border-[#AC854B] cursor-pointer"
     >
       {/* Visual Container (Ratio 4:5 compliant) */}
       <div className="relative aspect-4/5 w-full bg-[#FAF9F7] overflow-hidden p-6 flex items-center justify-center">
         <img
           src={product.primaryImage}
           alt={product.additionalImages[0]?.alt || product.name}
-          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 will-change-transform"
+          className="premium-product-card__image w-full h-full object-contain will-change-transform"
           loading="lazy"
         />
 

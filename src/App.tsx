@@ -27,6 +27,7 @@ import { CheckoutView } from './components/checkout/CheckoutView';
 import { ConfirmationView } from './components/checkout/ConfirmationView';
 import { AccountView } from './components/account/AccountView';
 import { AdminPortalView } from './components/admin/AdminPortalView';
+import { AdminAuthView } from './components/admin/AdminAuthView';
 import { AboutView } from './components/pages/AboutView';
 import { AuthenticityView } from './components/pages/AuthenticityView';
 import { BlogView } from './components/pages/BlogView';
@@ -174,6 +175,14 @@ function AppContent() {
       return <AccountView navigate={navigate} />;
     }
 
+    if (currentRoute === '/admin/login') {
+      return <AdminAuthView mode="login" navigate={navigate} />;
+    }
+
+    if (currentRoute === '/admin/create') {
+      return <AdminAuthView mode="create" navigate={navigate} />;
+    }
+
     if (currentRoute === '/admin') {
       return <AdminPortalView navigate={navigate} />;
     }
@@ -228,7 +237,7 @@ function AppContent() {
     );
   };
 
-  const isAdmin = currentRoute === '/admin';
+  const isAdmin = currentRoute.startsWith('/admin');
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF9F7] text-[#002141] font-montserrat antialiased selection:bg-[#AC854B] selection:text-[#FAF9F7]">

@@ -3,13 +3,12 @@ import { Order, Product, UserProfile } from '../types';
 
 // Supabase Configuration
 const metaEnv = (import.meta as any).env || {};
-const SUPABASE_URL =
-  metaEnv.VITE_SUPABASE_URL ||
-  'https://rhsmxnpajesyhfzjyueu.supabase.co';
+const SUPABASE_URL = metaEnv.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = metaEnv.VITE_SUPABASE_ANON_KEY;
 
-const SUPABASE_ANON_KEY =
-  metaEnv.VITE_SUPABASE_ANON_KEY ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJoc214bnBhamVzeWhmemp5dWV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NTMzMzgsImV4cCI6MjEwNDUyOTMzOH0.sLRiSoZkVZ2lB8pUycI8-rcqVYGgvUZ4zmH4sp3FC6M';
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  throw new Error('Supabase navigateur non configuré. Renseignez VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY.');
+}
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
@@ -51,8 +50,7 @@ export async function signUpWithSupabase({
           phone: cleanWhatsApp,
           whatsapp: cleanWhatsApp,
           commune: commune || 'Abidjan',
-          delivery_address: deliveryAddress || '',
-          role: cleanEmail.includes('heritageci15@gmail.com') || cleanEmail.includes('admin') ? 'admin' : 'customer'
+          delivery_address: deliveryAddress || ''
         }
       }
     });
@@ -73,8 +71,7 @@ export async function signUpWithSupabase({
           email: cleanEmail,
           phone: cleanWhatsApp || null,
           commune: commune || '',
-          delivery_address: deliveryAddress || '',
-          role: cleanEmail.includes('heritageci15@gmail.com') ? 'admin' : 'customer'
+          delivery_address: deliveryAddress || ''
         });
       } catch (e) {
         // RLS ou table non encore migrée : ignoré car auth.users stocke déjà les métadonnées
@@ -148,7 +145,7 @@ export async function fetchUserProfile(userId: string): Promise<UserProfile | nu
           fullName: userData.user.user_metadata?.full_name || 'Client HERITAGE',
           commune: userData.user.user_metadata?.commune,
           deliveryAddress: userData.user.user_metadata?.delivery_address,
-          role: userData.user.user_metadata?.role || (userData.user.email?.includes('heritageci15') ? 'admin' : 'customer')
+          role: 'customer'
         };
       }
       return null;

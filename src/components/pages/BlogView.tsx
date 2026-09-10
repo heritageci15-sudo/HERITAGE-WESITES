@@ -167,7 +167,7 @@ export const BlogView: React.FC<BlogViewProps> = ({ navigate }) => {
           {filteredArticles.map((art) => (
             <div
               key={art.slug}
-              className="bg-white border border-[#002141]/10 flex flex-col justify-between overflow-hidden group hover:border-[#AC854B] hover:shadow-md transition-all cursor-pointer"
+              className="premium-section-card bg-white border border-[#002141]/10 flex flex-col justify-between overflow-hidden group hover:border-[#AC854B] cursor-pointer"
               onClick={() => setSelectedArticle(art)}
             >
               <div className="aspect-16/10 bg-[#002141] overflow-hidden relative">

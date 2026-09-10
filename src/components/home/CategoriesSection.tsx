@@ -23,7 +23,7 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({ navigate }
         </div>
 
         {/* Featured Category Card - Montres */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white border border-[#002141]/10 p-8 md:p-12 shadow-xs">
+        <div className="premium-section-card grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white border border-[#002141]/10 p-8 md:p-12 shadow-xs">
           <div className="lg:col-span-6 space-y-6">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#AC854B] block">
               CATÉGORIE DISPONIBLE
@@ -41,7 +41,7 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({ navigate }
                 type="button"
                 id="categories-discover-watches"
                 onClick={() => navigate('/montres')}
-                className="inline-flex items-center gap-3 px-6 py-3.5 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] transition-colors cursor-pointer group"
+                className="premium-cta inline-flex items-center gap-3 px-6 py-3.5 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] cursor-pointer group"
               >
                 <span>DÉCOUVRIR LES MONTRES</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

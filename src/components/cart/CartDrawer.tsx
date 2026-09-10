@@ -85,7 +85,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     navigate('/montres');
                     setIsCartOpen(false);
                   }}
-                  className="px-6 py-2.5 bg-[#002141] text-[#FAF9F7] text-xs font-semibold uppercase tracking-widest hover:bg-[#AC854B] transition-colors cursor-pointer"
+                  className="premium-cta px-6 py-2.5 bg-[#002141] text-[#FAF9F7] text-xs font-semibold uppercase tracking-widest hover:bg-[#AC854B] cursor-pointer"
                 >
                   DÉCOUVRIR LES MONTRES
                 </button>
@@ -187,7 +187,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   navigate('/commande');
                   setIsCartOpen(false);
                 }}
-                className="w-full py-3 px-4 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-semibold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                className="premium-cta w-full py-3 px-4 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-semibold uppercase tracking-widest flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>PASSER AU PAIEMENT</span>
                 <ArrowRight className="w-4 h-4" />

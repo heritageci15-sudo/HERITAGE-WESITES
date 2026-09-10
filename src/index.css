@@ -9,6 +9,7 @@
     --color-sable: #E8E1D3;
     --color-anthracite: #3A3A3A;
     --color-bronze: #6B4A22;
+    --font-heritage-wordmark: 'Montserrat', Arial, sans-serif;
   }
 
   body {
@@ -30,4 +31,387 @@
 :focus-visible {
   outline: 2px solid #AC854B;
   outline-offset: 2px;
+}
+
+/* Official HERITAGE wordmark: dense, uppercase sans-serif lettering. */
+.brand-wordmark {
+  font-family: var(--font-heritage-wordmark);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 0.95;
+}
+
+.brand-descriptor {
+  font-family: var(--font-heritage-wordmark);
+  font-weight: 600;
+  letter-spacing: 0.23em;
+  line-height: 1.15;
+}
+
+/* Premium micro-interactions: motion never changes document layout. */
+.premium-cta,
+.premium-product-card {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.premium-cta {
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.premium-product-card {
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 180ms ease;
+}
+
+.premium-product-card__image {
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.premium-section-card {
+  transform: translateZ(0);
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 180ms ease;
+}
+
+.premium-nav-link,
+.premium-header-icon-button,
+footer ul > li > button {
+  transform: translateZ(0);
+  transition:
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.hero-scroll-journey {
+  height: 560vh;
+}
+
+.hero-scroll-media {
+  transform: scale(1.04);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.hero-scroll-mobile-scrim {
+  background: linear-gradient(
+    180deg,
+    rgb(0 33 65 / 70%) 0%,
+    rgb(0 33 65 / 25%) 28%,
+    rgb(0 33 65 / 52%) 64%,
+    rgb(0 33 65 / 74%) 100%
+  );
+}
+
+@media (max-width: 767px) {
+  .hero-scroll-journey {
+    height: 680vh;
+  }
+
+  .hero-scroll-media {
+    transform: scale(1.6);
+    transform-origin: center 30%;
+  }
+
+  /* The mobile scene is intentionally close-cropped so the watch, not an
+     empty part of the original vertical frame, fills the whole hero. */
+  .hero-copy-stage {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .hero-copy-band {
+    right: 1.5rem;
+    left: 1.5rem;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .hero-copy-content {
+    width: 100%;
+    max-width: min(20rem, 100%);
+  }
+
+  .hero-eyebrow {
+    max-width: 100%;
+    margin-bottom: 0.875rem;
+    align-items: flex-start;
+  }
+
+  .hero-eyebrow-text {
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    line-height: 1.35;
+  }
+
+  .hero-copy-heading {
+    max-width: 20ch;
+    margin-bottom: 1rem;
+    font-size: clamp(2.15rem, 9.1vw, 2.4rem);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    overflow-wrap: normal;
+  }
+
+  .hero-copy-description {
+    max-width: 32ch;
+    margin-bottom: 1.5rem;
+    font-size: 1.06rem;
+    line-height: 1.55;
+  }
+
+  .hero-copy-band .premium-cta {
+    min-height: 3.5rem;
+    padding: 0.9375rem 1rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.13em;
+  }
+
+  .hero-copy-band .premium-cta svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+}
+
+.premium-nav-link {
+  position: relative;
+}
+
+.premium-nav-link::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1.5px;
+  background-color: #D6BB8F;
+  opacity: 0;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
+}
+
+.premium-nav-link:focus-visible::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.premium-cta:focus-visible {
+  box-shadow: 0 0 0 4px rgb(214 187 143 / 35%);
+}
+
+.premium-cta:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgb(0 33 65 / 12%);
+  transition-duration: 110ms;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .premium-cta:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgb(0 33 65 / 18%);
+  }
+
+  .premium-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 32px rgb(0 33 65 / 13%);
+  }
+
+  .premium-product-card:hover .premium-product-card__image {
+    transform: scale(1.035);
+  }
+
+  .premium-section-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 30px rgb(0 33 65 / 11%);
+  }
+
+  .premium-nav-link:hover::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .premium-header-icon-button:hover {
+    transform: translateY(-1px) scale(1.04);
+    box-shadow: 0 6px 14px rgb(0 33 65 / 12%);
+  }
+
+  .header--overlay .premium-header-icon-button:hover {
+    color: #D6BB8F;
+    background-color: rgb(214 187 143 / 18%);
+  }
+
+  .header--solid .premium-header-icon-button:hover {
+    color: #AC854B;
+    background-color: rgb(172 133 75 / 12%);
+  }
+
+  footer ul > li > button:hover {
+    transform: translateX(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll-journey {
+    height: 100svh;
+    min-height: 600px;
+  }
+
+  .premium-cta,
+  .premium-product-card,
+  .premium-product-card__image,
+  .premium-section-card,
+  .premium-nav-link,
+  .premium-header-icon-button,
+  footer ul > li > button {
+    transition-duration: 0.01ms !important;
+  }
+
+  .premium-cta:hover,
+  .premium-product-card:hover,
+  .premium-product-card:hover .premium-product-card__image,
+  .premium-section-card:hover,
+  .premium-nav-link:hover,
+  .premium-header-icon-button:hover,
+  footer ul > li > button:hover {
+    transform: none !important;
+  }
+}
+
+/* Administration portal: compact, accessible controls with one shared rhythm. */
+.admin-primary-button,
+.admin-secondary-button {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.admin-primary-button {
+  background: #002141;
+  color: #FAF9F7;
+}
+
+.admin-primary-button:hover:not(:disabled) {
+  background: #16466a;
+  transform: translateY(-1px);
+}
+
+.admin-secondary-button {
+  border: 1px solid rgb(0 33 65 / 25%);
+  background: #FAF9F7;
+  color: #002141;
+}
+
+.admin-secondary-button:hover:not(:disabled) {
+  border-color: #AC854B;
+  color: #AC854B;
+}
+
+.admin-icon-button {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(0 33 65 / 18%);
+  background: #FAF9F7;
+  color: #002141;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.admin-icon-button:hover {
+  border-color: #AC854B;
+  background: rgb(214 187 143 / 15%);
+  color: #AC854B;
+}
+
+.admin-sidebar-icon {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  color: #FAF9F7;
+}
+
+.admin-input {
+  display: block;
+  width: 100%;
+  min-height: 3rem;
+  border: 1px solid rgb(0 33 65 / 20%);
+  background: #fff;
+  padding: 0.75rem 0.875rem;
+  color: #002141;
+  line-height: 1.45;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.admin-input:focus {
+  border-color: #AC854B;
+  box-shadow: 0 0 0 3px rgb(172 133 75 / 18%);
+}
+
+.admin-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgb(172 133 75 / 45%);
+  background: rgb(214 187 143 / 16%);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6B4A22;
+}
+
+.admin-rich-editor :is(h2, h3) {
+  margin: 1.5em 0 0.5em;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  color: #002141;
+}
+
+.admin-rich-editor :is(ul, ol, blockquote) {
+  margin: 1em 0;
+  padding-left: 1.5rem;
+}
+
+.admin-rich-editor blockquote {
+  border-left: 3px solid #AC854B;
+  color: #3A3A3A;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-primary-button,
+  .admin-secondary-button,
+  .admin-icon-button {
+    transition: none;
+  }
+
+  .admin-primary-button:hover {
+    transform: none;
+  }
 }

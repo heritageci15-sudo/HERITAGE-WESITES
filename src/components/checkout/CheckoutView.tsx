@@ -481,7 +481,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ navigate }) => {
                 type="submit"
                 disabled={isProcessing}
                 id="checkout-pay-button"
-                className="w-full py-4 px-6 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.18em] transition-colors flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 shadow-sm"
+                className="premium-cta w-full py-4 px-6 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.18em] flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 shadow-sm"
               >
                 {isProcessing ? (
                   <span>VALIDATION EN COURS...</span>

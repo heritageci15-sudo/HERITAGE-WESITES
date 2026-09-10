@@ -242,7 +242,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, n
                 type="button"
                 id="pdp-add-to-cart"
                 onClick={handleAddToCart}
-                className="w-full py-4 px-6 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.18em] transition-colors flex items-center justify-center gap-3 cursor-pointer shadow-sm"
+                className="premium-cta w-full py-4 px-6 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.18em] flex items-center justify-center gap-3 cursor-pointer shadow-sm"
               >
                 {addedNotice ? (
                   <>
@@ -263,7 +263,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, n
                 target="_blank"
                 rel="noopener noreferrer"
                 id="pdp-whatsapp-advisor"
-                className="w-full py-3.5 px-6 bg-white hover:bg-[#FAF9F7] text-[#002141] border border-[#002141]/20 text-xs font-bold uppercase tracking-[0.16em] transition-colors flex items-center justify-center gap-2.5 cursor-pointer"
+                className="premium-cta w-full py-3.5 px-6 bg-white hover:bg-[#FAF9F7] text-[#002141] border border-[#002141]/20 text-xs font-bold uppercase tracking-[0.16em] flex items-center justify-center gap-2.5 cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4 text-[#AC854B]" />
                 <span>ÉCHANGER AVEC UN CONSEILLER</span>

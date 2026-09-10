@@ -52,7 +52,7 @@ export const CartView: React.FC<CartViewProps> = ({ navigate }) => {
               <button
                 type="button"
                 onClick={() => navigate('/montres')}
-                className="px-8 py-3.5 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] transition-colors cursor-pointer"
+                className="premium-cta px-8 py-3.5 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] cursor-pointer"
               >
                 DÉCOUVRIR LES MONTRES
               </button>
@@ -176,7 +176,7 @@ export const CartView: React.FC<CartViewProps> = ({ navigate }) => {
                   type="button"
                   id="cart-proceed-checkout"
                   onClick={() => navigate('/commande')}
-                  className="w-full py-4 px-6 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.18em] transition-colors flex items-center justify-center gap-3 cursor-pointer shadow-sm"
+                  className="premium-cta w-full py-4 px-6 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.18em] flex items-center justify-center gap-3 cursor-pointer shadow-sm"
                 >
                   <span>PASSER AU PAIEMENT</span>
                   <ArrowRight className="w-4 h-4" />

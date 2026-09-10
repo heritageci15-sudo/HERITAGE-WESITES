@@ -195,7 +195,7 @@ export const ConfirmationView: React.FC<ConfirmationViewProps> = ({ navigate }) 
           <button
             type="button"
             onClick={() => navigate('/compte')}
-            className="w-full sm:w-auto px-8 py-3.5 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] transition-colors cursor-pointer text-center"
+            className="premium-cta w-full sm:w-auto px-8 py-3.5 bg-[#002141] hover:bg-[#AC854B] text-[#FAF9F7] text-xs font-bold uppercase tracking-[0.16em] cursor-pointer text-center"
           >
             SUIVRE CETTE COMMANDE DANS MON COMPTE
           </button>

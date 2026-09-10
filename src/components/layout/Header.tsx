@@ -39,6 +39,20 @@ export const Header: React.FC<HeaderProps> = ({
     { label: 'CONTACT', route: '/contact' }
   ];
 
+  const handleBrandLogoClick = () => {
+    if (currentRoute !== '/' && currentRoute !== '') {
+      navigate('/');
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+  };
+
   return (
     <>
       <a
@@ -51,8 +65,8 @@ export const Header: React.FC<HeaderProps> = ({
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-300 ${
           isScrolled || currentRoute !== '/'
-            ? 'bg-[#FAF9F7]/95 backdrop-blur-md border-b border-[#002141]/10 py-3.5 shadow-xs'
-            : 'bg-gradient-to-b from-[#002141]/70 via-[#002141]/30 to-transparent py-5 text-[#FAF9F7]'
+            ? 'header--solid bg-[#FAF9F7]/95 backdrop-blur-md border-b border-[#002141]/10 py-3.5 shadow-xs'
+            : 'header--overlay bg-gradient-to-b from-[#002141]/70 via-[#002141]/30 to-transparent py-5 text-[#FAF9F7]'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -62,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({
               type="button"
               id="header-mobile-menu-button"
               onClick={() => setIsMobileMenuOpen(true)}
-              className="p-2 -ml-2 text-current hover:opacity-75 focus:outline-hidden"
+              className="premium-header-icon-button p-2 -ml-2 text-current hover:opacity-75 focus:outline-hidden"
               aria-label="Ouvrir le menu de navigation"
             >
               <Menu className="w-5 h-5" />
@@ -73,9 +87,9 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             id="header-brand-logo"
-            onClick={() => navigate('/')}
-            className="flex items-center gap-3 text-left group cursor-pointer"
-            aria-label="HERITAGE Boutique - Retour à l'accueil"
+            onClick={handleBrandLogoClick}
+            className="flex items-center gap-2.5 sm:gap-3 text-left group cursor-pointer"
+            aria-label="HERITAGE Montres et Accessoires - Retour à l'accueil"
           >
             <div className="w-8 h-8 sm:w-9 sm:h-9 relative flex-shrink-0">
               <img
@@ -86,18 +100,18 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
             <div className="flex flex-col">
               <span
-                className={`font-playfair text-lg sm:text-xl font-bold tracking-[0.2em] leading-none transition-colors ${
+                className={`brand-wordmark text-base sm:text-lg transition-colors ${
                   isScrolled || currentRoute !== '/' ? 'text-[#002141]' : 'text-[#FAF9F7]'
                 }`}
               >
                 HERITAGE
               </span>
               <span
-                className={`text-[8px] sm:text-[9px] font-semibold tracking-[0.25em] uppercase leading-tight mt-1 transition-colors ${
-                  isScrolled || currentRoute !== '/' ? 'text-[#AC854B]' : 'text-[#D6BB8F]'
+                className={`brand-descriptor hidden sm:block text-[7px] sm:text-[8px] uppercase mt-1.5 transition-colors ${
+                  isScrolled || currentRoute !== '/' ? 'text-[#002141]' : 'text-[#D6BB8F]'
                 }`}
               >
-                MONTRES &middot; ABIDJAN
+                MONTRES ET ACCESSOIRES
               </span>
             </div>
           </button>
@@ -120,7 +134,7 @@ export const Header: React.FC<HeaderProps> = ({
                   type="button"
                   id={`nav-link-${item.label.toLowerCase().replace(/[\sà]/g, '')}`}
                   onClick={() => navigate(item.route)}
-                  className={`text-xs font-semibold tracking-[0.14em] uppercase py-1 transition-colors relative cursor-pointer ${
+                  className={`premium-nav-link text-xs font-semibold tracking-[0.14em] uppercase py-1 transition-colors relative cursor-pointer ${
                     isScrolled || currentRoute !== '/'
                       ? isActive
                         ? 'text-[#002141] font-bold'
@@ -152,7 +166,7 @@ export const Header: React.FC<HeaderProps> = ({
                 if (onOpenSearch) onOpenSearch();
                 else setIsSearchOpen(true);
               }}
-              className="p-2.5 rounded-full hover:bg-black/5 transition-colors cursor-pointer text-current"
+              className="premium-header-icon-button p-2.5 rounded-full hover:bg-black/5 transition-colors cursor-pointer text-current"
               aria-label="Rechercher une montre ou une référence"
             >
               <Search className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -162,7 +176,7 @@ export const Header: React.FC<HeaderProps> = ({
               type="button"
               id="header-account-button"
               onClick={() => navigate('/compte')}
-              className="p-2.5 rounded-full hover:bg-black/5 transition-colors cursor-pointer text-current"
+              className="premium-header-icon-button p-2.5 rounded-full hover:bg-black/5 transition-colors cursor-pointer text-current"
               aria-label="Mon compte et suivi des commandes"
             >
               <User className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -172,7 +186,7 @@ export const Header: React.FC<HeaderProps> = ({
               type="button"
               id="header-wishlist-button"
               onClick={() => navigate('/liste-envies')}
-              className="relative p-2.5 rounded-full hover:bg-black/5 transition-colors cursor-pointer text-current flex items-center"
+              className="premium-header-icon-button relative p-2.5 rounded-full hover:bg-black/5 transition-colors cursor-pointer text-current flex items-center"
               aria-label={`Liste d'envies, ${wishlistItemCount} article${wishlistItemCount > 1 ? 's' : ''}`}
             >
               <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${wishlistItemCount > 0 ? 'fill-[#AC854B] text-[#AC854B]' : ''}`} />
@@ -190,7 +204,7 @@ export const Header: React.FC<HeaderProps> = ({
                 if (onOpenCart) onOpenCart();
                 else setIsCartOpen(true);
               }}
-              className="relative p-2.5 rounded-full hover:bg-black/5 transition-colors cursor-pointer text-current flex items-center"
+              className="premium-header-icon-button relative p-2.5 rounded-full hover:bg-black/5 transition-colors cursor-pointer text-current flex items-center"
               aria-label={`Panier d'achats, ${cartItemCount} article${cartItemCount > 1 ? 's' : ''}`}
             >
               <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -214,17 +228,20 @@ export const Header: React.FC<HeaderProps> = ({
         >
           <div className="w-full max-w-xs bg-[#FAF9F7] h-full shadow-2xl flex flex-col p-6 overflow-y-auto">
             <div className="flex items-center justify-between pb-6 border-b border-[#002141]/10">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <img src="/assets/favicon.svg" alt="HERITAGE" className="w-7 h-7" />
-                <span className="font-playfair font-bold text-lg text-[#002141] tracking-widest">
-                  HERITAGE
-                </span>
+                <div className="flex flex-col">
+                  <span className="brand-wordmark text-base text-[#002141]">HERITAGE</span>
+                  <span className="brand-descriptor text-[6px] uppercase text-[#002141] mt-1">
+                    MONTRES ET ACCESSOIRES
+                  </span>
+                </div>
               </div>
               <button
                 type="button"
                 id="header-mobile-close-button"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 -mr-2 text-[#002141] hover:opacity-75 focus:outline-hidden"
+                className="premium-header-icon-button p-2 -mr-2 text-[#002141] hover:opacity-75 focus:outline-hidden"
                 aria-label="Fermer le menu"
               >
                 <X className="w-5 h-5" />
@@ -241,7 +258,7 @@ export const Header: React.FC<HeaderProps> = ({
                     navigate(item.route);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`text-left text-sm font-semibold tracking-[0.14em] uppercase py-2 cursor-pointer ${
+                  className={`premium-nav-link text-left text-sm font-semibold tracking-[0.14em] uppercase py-2 cursor-pointer ${
                     currentRoute === item.route ||
                     (item.route === '/boutique' && (currentRoute === '/montres' || currentRoute.startsWith('/montres'))) ||
                     (item.route === '/blogs' && (currentRoute === '/blogs' || currentRoute.startsWith('/blogs') || currentRoute === '/blog'))
@@ -260,7 +277,7 @@ export const Header: React.FC<HeaderProps> = ({
                   navigate('/liste-envies');
                   setIsMobileMenuOpen(false);
                 }}
-                className={`flex items-center justify-between text-left text-sm font-semibold tracking-[0.14em] uppercase py-2 cursor-pointer ${
+                className={`premium-nav-link flex items-center justify-between text-left text-sm font-semibold tracking-[0.14em] uppercase py-2 cursor-pointer ${
                   currentRoute === '/liste-envies' || currentRoute === '/wishlist'
                     ? 'text-[#AC854B] font-bold'
                     : 'text-[#002141] hover:text-[#AC854B]'
@@ -294,7 +311,7 @@ export const Header: React.FC<HeaderProps> = ({
                 href="https://wa.me/2250707181560?text=Bonjour%20HERITAGE%2C%20je%20souhaite%20un%20conseil%20au%20sujet%20de%20votre%20s%C3%A9lection%20de%20montres."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-full mt-2 py-2.5 px-4 bg-[#002141] text-[#FAF9F7] text-xs font-semibold tracking-wider uppercase rounded-xs"
+                className="premium-cta inline-flex items-center justify-center w-full mt-2 py-2.5 px-4 bg-[#002141] text-[#FAF9F7] text-xs font-semibold tracking-wider uppercase rounded-xs"
               >
                 Échanger sur WhatsApp
               </a>
